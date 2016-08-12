@@ -14,3 +14,6 @@ dist/
 
 fasttext/fasttext.cpp
 facebookresearch-fasttext-*
+
+# Intellij
+.idea/
