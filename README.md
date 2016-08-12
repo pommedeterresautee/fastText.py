@@ -71,6 +71,8 @@ The previously trained model can be used to compute word vectors for
 out-of-vocabulary words.
 
 ```python
+print model.get_vector('king')
+# or just use a nice syntax
 print model['king'] # get the vector of the word 'king'
 ```
 

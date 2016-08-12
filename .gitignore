@@ -17,3 +17,6 @@ facebookresearch-fasttext-*
 
 # Intellij
 .idea/
+
+# pip
+.eggs/
