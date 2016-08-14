@@ -2,6 +2,7 @@
 import numpy as np
 
 
+
 class WordVectorModel(object):
     def __init__(self, model, words):
         self._model = model
