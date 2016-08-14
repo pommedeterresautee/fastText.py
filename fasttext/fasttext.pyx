@@ -5,6 +5,9 @@ from interface cimport loadModelWrapper
 from interface cimport FastTextModel
 from interface cimport Dictionary
 
+# numpy
+import numpy as np
+
 # Python/C++ standart libraries
 from libc.stdlib cimport malloc, free
 from libcpp.string cimport string
@@ -24,9 +27,12 @@ cdef class FastTextModelWrapper:
     def get_words(self):
         return self.words
 
-    def get_vector(self, word):
+    def get_vector(self, word, norm = False):
         word_bytes = bytes(word, 'utf-8')
-        return self.fm.getVectorWrapper(word_bytes)
+        vec = np.array(self.fm.getVectorWrapper(word_bytes))
+        if norm:
+            vec = vec / np.linalg.norm(vec)
+        return vec
 
     @property
     def dim(self):
