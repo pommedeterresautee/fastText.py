@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import unittest
 from os import path
-
+import numpy as np
 import fasttext as ft
 
 cbow_file = path.join(path.dirname(__file__), 'cbow_params_test.bin')
