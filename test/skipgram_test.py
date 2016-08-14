@@ -3,12 +3,13 @@
 from __future__ import unicode_literals
 import unittest
 from os import path
-
+import numpy as np
 import fasttext as ft
 
 skipgram_file = path.join(path.dirname(__file__), 'skipgram_params_test.bin')
 input_file = path.join(path.dirname(__file__), 'params_test.txt')
 output = path.join(path.dirname(__file__), 'generated_skipgram')
+
 
 # Test to make sure that skipgram interface run correctly
 class TestSkipgramModel(unittest.TestCase):
@@ -80,9 +81,18 @@ class TestSkipgramModel(unittest.TestCase):
         self.assertTrue(path.isfile(output + '.bin'))
         self.assertTrue(path.isfile(output + '.vec'))
 
+        # Make sure the model contains the word "the"
+        self.assertTrue("the" in model)
+
         # Make sure the vector have the right dimension
         self.assertEqual(len(model['the']), dim)
         self.assertEqual(len(model.get_vector('the')), dim)
+
+        # Make sure L2 normalization is working as expected
+        self.assertGreater(abs(np.linalg.norm(model['the'])) - 1, 1e-5)
+        model.set_vec_norm(True)
+        self.assertLess(abs(np.linalg.norm(model['the'])) - 1, 1e-5)
+        model.set_vec_norm(False)
 
         # Make sure we support unicode character
         unicode_str = 'Καλημέρα'

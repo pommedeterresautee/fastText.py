@@ -29,7 +29,7 @@ cdef class FastTextModelWrapper:
 
     def get_vector(self, word, norm = False):
         word_bytes = bytes(word, 'utf-8')
-        vec = np.array(self.fm.getVectorWrapper(word_bytes))
+        vec = self.fm.getVectorWrapper(word_bytes)
         if norm:
             vec = vec / np.linalg.norm(vec)
         return vec
