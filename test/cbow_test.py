@@ -88,9 +88,9 @@ class TestCBOWModel(unittest.TestCase):
         self.assertEqual(len(model.get_vector('the')), dim)
 
         # Make sure L2 normalization is working as expected
-        self.assertGreater(abs(np.linalg.norm(model['the'])) - 1, 1e-5)
+        self.assertGreater(abs(np.linalg.norm(model['the']) - 1), 1e-5)
         model.set_vec_norm(True)
-        self.assertLess(abs(np.linalg.norm(model['the'])) - 1, 1e-5)
+        self.assertLess(abs(np.linalg.norm(model['the']) - 1), 1e-5)
         model.set_vec_norm(False)
 
         # Make sure we support unicode character
